@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Task - Matrix Game</title>
+    <style>
+        .matrix-container .heading{
+            text-align: center;
+        }
+        .matrix-container td{
+            background-color: blue;
+            height:30px;
+            width:30px;
+            text-align: center;
+        }
+        .matrix-container td.bgred{
+            background-color: red;
+        }        
+        .matrix-container td.txtWhite{
+            color:white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Container Starts-->
+    <div class="main-container">
+        <!-- Matrix Container Start -->
+        <div class="matrix-container">
+            <h1 class="heading">Matrix Game</h1>
+            <table class="matrix-table" cellpadding="0" cellspacing="0" border="2" width="200px" align="center">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <!-- Matrix Container Start -->
+    </div>
+    <!-- Main Container Ends -->
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            let clickcount=1;
+            $(document).on("click",".matrix-table td",function() {
+                if($(this).hasClass('selected')){
+                    return
+                }
+                else{
+                    $(this).addClass('selected bgred box-'+clickcount).html('Box '+clickcount);
+                    $(".matrix-table td").each(function() {
+                        let removecount = clickcount-2;
+                        let removeclass = '';
+                        if($(this).attr('class') != null){
+                            removeclass = $(this).attr('class').split('-');
+                        }
+                        if(removecount == removeclass[1]){
+                        $(this).removeClass('bgred').addClass('txtWhite');
+                        }
+                    });
+                    clickcount++;
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
